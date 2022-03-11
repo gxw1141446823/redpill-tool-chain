@@ -14,15 +14,7 @@ jobs:
        include:
       #  两行一组，删除不需要的版本
          - platform: ds3615xs
-           version: 6.2.4-25556
-         - platform: ds3615xs
-           version: 7.0-41222
-         - platform: ds3615xs
            version: 7.0.1-42218
-         - platform: ds918p
-           version: 6.2.4-25556
-         - platform: ds918p
-           version: 7.0-41890
          - platform: ds918p
            version: 7.0.1-42218
          - platform: ds3617xs
@@ -54,14 +46,6 @@ jobs:
         run: |
           cp sample_user_config.json ${{matrix.platform}}_user_config.json
 
-          # 调整VID和PID
-          sed -i -e 's\0x0001\0x0002\g' -e 's\0x46f4\0x0002\g' ${{matrix.platform}}_user_config.json
-
-          # 调整SN和MAC 最好使用 actions secrets 引入
-          sed -i -e 's\1234XXX123\0123456789\g' -e 's\XXYYXXYYXXYY\00AAAAAAAAAA\g' ${{matrix.platform}}_user_config.json
-
-          # 添加第二张网卡mac并设置网卡数量
-          sed -i -e 's/00AAAAAAAAAA"/&,\n\t"mac2": "00BBBBBBBBBB",\n\t"netif_num": 2/' ${{matrix.platform}}_user_config.json
 
           # 调整synoinfo
           sed -i -e 's/"synoinfo": {},/"synoinfo": {\n\t"maxlanport": "2"\n    },/' ${{matrix.platform}}_user_config.json
