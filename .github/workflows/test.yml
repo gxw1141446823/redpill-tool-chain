@@ -53,7 +53,7 @@ jobs:
           # 添加扩展驱动
           ./redpill_tool_chain.sh add https://github.com/jumkey/redpill-load/raw/develop/redpill-acpid/rpext-index.json
           ./redpill_tool_chain.sh add https://github.com/jumkey/redpill-load/raw/develop/redpill-virtio/rpext-index.json
-
+          ./redpill_tool_chain.sh add https://github.com/jumkey/redpill-load/raw/develop/redpill-boot-wait/rpext-index.json
       - name: 添加 jumkey.misc
         if: endsWith(matrix.version,'42218')
         run: |
